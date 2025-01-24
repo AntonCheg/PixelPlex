@@ -1,5 +1,5 @@
 
-# PixelPlex Test Task
+# PixwardGames Test Task
 
 ## Установка и запуск проекта
 
