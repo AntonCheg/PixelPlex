@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "version": "v1.0.0",
-    "title": "PixelPlex Test Task"
+    "title": "PixwardGames Test Task"
   },
   "servers": [
     {
