@@ -15,7 +15,7 @@
    
 3. **Запустите сервис базы данных (MySQL) отдельно**:
     ```bash
-    docker-compose up -d db
+    docker-compose -f 'docker-compose.yml' up -d --build 'db'
     ```
     Это необходимо для прогонки миграций базы данных.
 
