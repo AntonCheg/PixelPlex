@@ -9,6 +9,7 @@ import { sequelize } from './db/models';
 import { fileRouter } from './routes/file.route';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from './swagger_output.json';
+import { errorHandler } from './middleware/error-handler.middleware';
 
 const app = express();
 
@@ -34,15 +35,7 @@ app.use('/api/files', fileRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
-app.use((err: Error, req: Request, res: Response, next) => {
-  console.error(err); // Выводим ошибку в консоль
-
-  // Проверяем, если ошибка имеет свойство 'status', иначе возвращаем 500
-  const status = (err as any).status || 500;
-  const message = (err as any).message || 'Internal Server Error';
-
-  res.status(status).json({ message });
-});
+app.use(errorHandler); // Глобальная обработка ошибок
 
 const start = async (): Promise<void> => {
   try {

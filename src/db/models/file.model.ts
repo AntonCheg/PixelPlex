@@ -55,7 +55,7 @@ class File extends Model<FileAttributes, FileCreationAttributes> {
           allowNull: false,
         },
         status: {
-          type: DataTypes.ENUM('pending', 'processed', 'failed'),
+          type: DataTypes.ENUM('pending', 'processing', 'failed', 'success'),
           allowNull: false,
         },
         fileName: {
