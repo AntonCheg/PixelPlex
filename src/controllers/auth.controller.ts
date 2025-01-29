@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../services/auth.service';
+import { RegisterUserDto } from '../dto/register-user.dto';
 
 // Регистрация
 export const register = async (
-  req: Request<{}, {}, { username: string; password: string }>,
+  req: Request<{}, {}, RegisterUserDto>,
   res: Response
 ): Promise<any> => {
   try {
@@ -18,7 +19,10 @@ export const register = async (
 };
 
 // Логин
-export const login = async (req: Request, res: Response): Promise<any> => {
+export const login = async (
+  req: Request<{}, {}, RegisterUserDto>,
+  res: Response
+): Promise<any> => {
   try {
     const { username, password } = req.body;
     const user = await AuthService.login(username, password);
