@@ -49,7 +49,7 @@ export const getUserFiles = async (req: Request, res) => {
     statuses as FileStatusEnum[]
   );
 
-  res.status(200).json({ files });
+  return res.status(200).json({ files });
 };
 
 export const downloadFile = async (
@@ -84,7 +84,7 @@ export const downloadFile = async (
     }
 
     // Отправляем файл пользователю
-    res.download(fileRecord.path, fileRecord.fileName, (err) => {
+    return res.download(fileRecord.path, fileRecord.fileName, (err) => {
       if (err) {
         console.error('Error sending file:', err);
         return res.status(500).json({ message: 'Error sending file' });
@@ -92,7 +92,7 @@ export const downloadFile = async (
     });
   } catch (err) {
     console.error('Error fetching file:', err);
-    res
+    return res
       .status(500)
       .json({ message: 'An error occurred while fetching the file' });
   }
