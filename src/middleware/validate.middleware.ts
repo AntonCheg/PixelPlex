@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
+import { NextFunction, Request, Response } from 'express';
 
 export const validateBody = (dtoClass: any) => {
   return async (req: Request, res: Response, next) => {
     // Преобразуем тело запроса в объект нужного класса DTO
-    const dtoObject = plainToClass(dtoClass, req.body);
+    const dtoObject = plainToInstance(dtoClass, req.body);
 
     // Валидируем объект
     const errors = await validate(dtoObject);
@@ -29,10 +29,10 @@ export const validateBody = (dtoClass: any) => {
 export const validateParams = (dtoClass: any) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     // Проверяем параметры пути (req.params)
-    const pathParams = plainToClass(dtoClass, req.params);
+    const pathParams = plainToInstance(dtoClass, req.params);
 
     // Проверяем query параметры (req.query)
-    const queryParams = plainToClass(dtoClass, req.query);
+    const queryParams = plainToInstance(dtoClass, req.query);
 
     // Валидируем параметры пути
     const pathErrors = await validate(pathParams as any);

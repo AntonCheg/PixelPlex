@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
 export const isAuthenticated = (req: Request, res: Response, next) => {
   if (req.session.userId) {

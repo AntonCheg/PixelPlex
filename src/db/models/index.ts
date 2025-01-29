@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
-import { User } from './user.model';
 import { File, FileStatusEnum } from './file.model';
+import { User } from './user.model';
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -20,4 +20,4 @@ File.initialize(sequelize);
 User.associate();
 File.associate();
 
-export { sequelize, User, File, FileStatusEnum };
+export { File, FileStatusEnum, sequelize, User };

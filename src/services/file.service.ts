@@ -76,6 +76,7 @@ class FileService {
       const file = await File.findByPk(fileId);
 
       if (!fs.existsSync(file.path)) {
+        await this.changeFileStatus(fileId, FileStatusEnum.FAILED);
         return;
       }
       const bannedWords = ['BANNED'];
@@ -108,7 +109,10 @@ class FileService {
 
       await this.changeFileStatus(fileId, FileStatusEnum.PENDING);
 
-      await queue.add('myJob', fileId, { delay: 5000 });
+      await queue.add('myJob', fileId, {
+        attempts: 3,
+        backoff: { type: 'exponential', delay: 5000 },
+      });
     }
   }
 }
