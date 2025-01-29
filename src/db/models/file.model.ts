@@ -1,6 +1,6 @@
+import path from 'path';
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { User } from './user.model';
-import path from 'path';
 // We don't recommend doing this. Read on for the new way of declaring Model typings.
 
 type FileAttributes = {
@@ -55,7 +55,12 @@ class File extends Model<FileAttributes, FileCreationAttributes> {
           allowNull: false,
         },
         status: {
-          type: DataTypes.ENUM('pending', 'processing', 'failed', 'success'),
+          type: DataTypes.ENUM(
+            FileStatusEnum.PENDING,
+            FileStatusEnum.PROCESSING,
+            FileStatusEnum.FAILED,
+            FileStatusEnum.SUCCESS
+          ),
           allowNull: false,
         },
         fileName: {

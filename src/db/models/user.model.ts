@@ -1,6 +1,5 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { File } from './file.model';
-// We don't recommend doing this. Read on for the new way of declaring Model typings.
 import bcrypt from 'bcryptjs';
 
 type UserAttributes = {
